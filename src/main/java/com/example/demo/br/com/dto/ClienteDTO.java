@@ -1,4 +1,4 @@
-package com.example.demo.br.com;
+package com.example.demo.br.com.dto;
 
 import org.springframework.web.bind.annotation.PutMapping;
 

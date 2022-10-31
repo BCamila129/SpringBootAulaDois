@@ -1,5 +1,8 @@
-package com.example.demo.br.com;
+package com.example.demo.br.com.controller;
 
+import com.example.demo.br.com.repository.Repository;
+import com.example.demo.br.com.dto.ClienteDTO;
+import com.example.demo.br.com.entity.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -17,18 +17,32 @@ public class Controller {
     Repository repository;
 
     @PostMapping
-    public Cliente create(@RequestBody Cliente cliente){
+    public Cliente create(@RequestBody Cliente cliente) {
         Cliente clienteSaved = repository.save(cliente);
         return clienteSaved;
     }
+
     @ResponseBody
-    public Optional<Cliente> getClienteById(@PathVariable Long id){
+    public Optional<Cliente> getClienteById(@PathVariable Long id) {
         Optional<Cliente> clienteReturned = repository.findById(id);
         return clienteReturned;
     }
     @DeleteMapping("/{id}")
-    public void deleteClienteById(@PathVariable Long id){
+    public String deleteClienteById(@PathVariable Long id) {
         repository.deleteById(id);
+        try {
+            Optional<Cliente> cliente = Optional.of(repository.getById(id));
+            if (cliente.isPresent()){
+                repository.deleteById(id);
+                return "Cliente de " + id + "deletado com sucesso";
+            }else{
+                throw new Exception("Cliente inexistente!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "O cliente de " + id + " não existe para ser deletado!" +
+                    "Por favor, entre em contato com o atendimento 666 666 666";
+        }
     }
     @GetMapping
     public List<Cliente> listClientes(){

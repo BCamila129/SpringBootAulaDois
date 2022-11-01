@@ -6,6 +6,7 @@ import com.example.demo.br.com.entity.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ public class Controller {
     Repository repository;
 
     @PostMapping
-    public Cliente create(@RequestBody Cliente cliente) {
+    public Cliente create(@RequestBody @Valid Cliente cliente) {
         Cliente clienteSaved = repository.save(cliente);
         return clienteSaved;
     }
@@ -50,7 +51,7 @@ public class Controller {
     }
 
     @PutMapping("/atualize/{id}")
-    public String updateClienteById(@RequestBody ClienteDTO clienteDTO, @PathVariable Long id){
+    public String updateClienteById(ClienteDTO clienteDTO, @PathVariable Long id){
         Optional<Cliente> velhoCliente = repository.findById(id);
         if(velhoCliente.isPresent()){
           Cliente cliente = velhoCliente.get();

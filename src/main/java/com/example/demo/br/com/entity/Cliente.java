@@ -1,14 +1,17 @@
 package com.example.demo.br.com.entity;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
 public class Cliente {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull(message = "O nome é obrigatório!")
     private String nome;
     private String endereco;
     @OneToMany(cascade = CascadeType.ALL) //Relacionamento entre tabela de cliente e produto
